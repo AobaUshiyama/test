@@ -1,0 +1,591 @@
+@charset "UTF-8";
+
+body{
+    display: none;
+}
+
+.facebook{
+    width: 60px;
+    margin: 16px 16px 0 0;
+}
+.instagram{
+    width: 60px;
+}
+
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255); /* 背景色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  #loading img {
+    opacity: 1; /* 初期状態では透明 */
+  }
+
+
+#g-nav{
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: #fff;
+    transition: all 0.3s;
+}
+.g-nav_item{
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    z-index: 999;
+}
+/*アクティブクラスがついたら透過なしにして最前面へ*/
+#g-nav.panelactive{
+    opacity: 1;
+    z-index:888;
+}
+/*ナビゲーション*/
+#g-nav ul {
+    display: none;
+    /*ナビゲーション天地中央揃え*/
+    position: absolute;
+    z-index: 888;
+    top:50%;
+    left: 65%;
+    transform: translate(-50%,-50%);
+}
+#g-nav.panelactive ul {
+    display: block;
+}
+/*リストのレイアウト設定*/
+
+#g-nav li{
+    list-style: none;
+      text-align: center; 
+  }
+  #g-nav li a{
+    color: #333;
+    text-decoration: none;
+    padding:10px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 2em;
+    font-weight: bold;
+}
+#g-nav li a:hover{
+    color: rgb(240, 187, 62);
+}
+
+/*========= ボタンのためのCSS ===============*/
+.openbtn1{
+    position:fixed;
+      z-index: 9998;/*ボタンを最前面に*/
+    top:10px;
+    right: 10px;
+    cursor: pointer;
+      width: 70px;
+      height:50px;
+}
+/*×に変化*/  
+.openbtn1 span{
+    display: inline-block;
+    transition: all .4s;
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+  background-color: #4981e9;
+    width: 45%;
+  }
+
+.openbtn1 span:nth-of-type(1) {
+  top:15px; 
+}
+
+.openbtn1 span:nth-of-type(2) {
+  top:23px;
+}
+
+.openbtn1 span:nth-of-type(3) {
+  top:31px;
+}
+
+.openbtn1.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+}
+
+.openbtn1.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.openbtn1.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
+}
+
+
+.meinvisual{
+    display: block;
+    position: relative;
+    margin: 0;
+    width:100%;
+}
+.meinvisual_sp{
+    display: none;
+}
+.soushoku_03{
+    width: 100%;
+}
+.soushoku_02{
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    top: 170vh;
+}
+.soushoku_01{
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    top: 58vh;
+}
+.about_cidernaut{
+    position: relative;
+    display: flex;/*cidernautの説明を横並びにする*/
+    flex-direction: row-reverse;
+    width: 100%;
+    z-index: 1;
+}
+.explain_01_images{
+    display: flex;/*cidernautの説明の画像を横並びにする*/
+    margin: 8em 0 0 5em;
+}
+#shop_image_up{
+    margin-right: 16px;/*画像の隙間基本フォントサイズ＝16px*/
+}
+#shop_image_down{
+    margin-top: 10em;
+}
+.explain_cidernaut{
+    display: block;/*cidernautの説明の文を横並びにする*/
+    margin: 8em 8em 0 5em;
+}
+.explain_cidernaut h2{
+    font-size: 2em;
+    color: #5b3a29;
+}
+.explain_cidernaut p{
+    width: 40vw;
+    line-height: 2em;
+}
+.explain_02_images{
+    display: flex;
+    margin: 8em 5em 0 0;
+}
+#cider_image_down{
+    margin-top: 10em;
+}
+#cider_image_up{
+    margin-left: 16px;
+}
+.about_hardcider{
+    position: relative;
+    display: block;
+    display: flex;
+    width: 100%;
+    z-index: 1;
+}
+.explain_hardcider{
+    position: relative;
+    margin: 8em 5em 0 8em;
+    align-items: center;
+}
+.explain_hardcider h2{
+    color: #5b3a29;
+    font-size: 1.8em;
+}
+.explain_hardcider p{
+    width: 40vw;
+    line-height: 2em;
+}
+
+  .content {
+    opacity: 0;
+  }
+  .content.inview {
+    animation-name: fade-in;
+    animation-duration: .5s;
+    animation-timing-function: ease-in-out;
+    animation-delay: .4s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+  @keyframes fade-in {
+    0% {
+      transform: translateY(40px);
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+}
+.select_top{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 8em;
+}
+.top_news{
+    position: relative;
+}
+.news{
+    position: absolute;
+}
+.news_sp{
+    display: none;
+}
+.news_p{
+    font-size: 5em;
+    color: #fff;
+    position: absolute;
+    top: -10px;
+    margin: 20px 0 0 20px;
+}
+.top_shop{
+    position: relative;
+}
+.shop{
+    position: absolute;
+}
+.shop_sp{
+    display: none;
+}
+.shop_p{
+    font-size: 5em;
+    color: #fff;
+    position: absolute;
+    top: -10px;
+    margin: 20px 0 0 20px;
+}
+.top_menu{
+    position: relative;
+}
+.menu{
+    position: absolute;
+    width: 33vw;
+}
+.menu_sp{
+    display: none;
+}
+.menu_p{
+    font-size: 5em;
+    color: #fff;
+    position: absolute;
+    top: -10px;
+    margin: 20px 0 0 20px;
+}
+.menu img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.select_top img{
+
+    width: 100%;
+
+}
+.menu::before{
+    content: "";
+    background: linear-gradient(180deg rgb(247, 207, 60, 0.5));
+    z-index: 1;
+    mix-blend-mode: multiply;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.top_contact{
+    background-image: url(../img/contact.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top: 700px;
+    text-align: center;
+    color: #fff;
+    padding: 1em 0 1em 0;
+    margin: 3em 0 3em 0;
+}
+.contact_image{
+    position: relative;
+    width: 100%;
+}
+
+.contact_h3{
+    position: relative;
+    font-size: 1.5em;
+    text-shadow: 0.3px 0.3px#545454;
+}
+footer{
+    position: relative;
+    top: 920px;
+    display: block;
+    height: 150px;
+}
+.footer_item{
+    margin-right: 30px;
+    display: flex;
+}
+.footer_all{
+    display: flex;
+    justify-content: space-around;
+}
+.facebook_footer{
+    width: 50px;
+    margin: 6px 6px 32px 0;
+}
+.instagram_footer{
+    width: 50px;
+    margin: 6px 6px 32px 0;
+}
+
+/* --------------------------
+Media Queries（メディアクエリ）
+-----------------------------*/
+
+@media screen and (min-width:480px) and (max-width:768px) {
+    /*タブレットサイズ／スマホ横画面サイズ：480px～768px */
+
+
+    
+    }/*タブレットサイズ/スマホ横サイズの設定：ここまで*/
+    
+    
+    @media screen and (max-width:479px) {
+    /* スマホサイズ：479px以下 */
+    .openbtn1{
+        top:50px;
+        width: 150px;
+        height:150px;        
+    }     
+    .openbtn1 span{
+        left: 30px;
+        height: 6px;
+    }
+    .openbtn1 span:nth-of-type(1) {
+        top:20px; 
+      } 
+      .openbtn1 span:nth-of-type(2) {
+        top:38px;
+      }
+      .openbtn1 span:nth-of-type(3) {
+        top:56px;
+      }
+      .openbtn1.active span:nth-of-type(1) {
+        top: 38px;
+        left: 35px;
+        transform: translateY(6px) rotate(-45deg);
+        width: 50%;
+    }
+    
+    .openbtn1.active span:nth-of-type(2) {
+      opacity: 0;
+    }
+    
+    .openbtn1.active span:nth-of-type(3){
+        top: 50px;
+        left: 35px;
+        transform: translateY(-6px) rotate(45deg);
+        width: 50%;
+    }
+      
+    h2{
+        margin-bottom: 0.875em;/*=14(基準の16pxの0.875文字分)*/
+        font-size: 1.125em;/*=18(基準の16pxの1.125文字分)*/
+    }
+    p{
+        font-size: 0.875em;/*=14(基準の16pxの0.875文字分)*/
+    }
+
+    .meinvisual{
+        display: none;
+    }
+    .meinvisual_sp{
+        display: block;
+        width: 100%;
+    }
+    #g-nav{
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        transition: all 0.3s;
+    }
+
+    .g-nav_item{
+        top: 50%;
+        left: 35%;
+    }
+    #g-nav ul {
+        /*ナビゲーション天地中央揃え*/
+        top:30%;
+        left: 48%;
+    }
+    li{
+        font-size: 2em;
+    }
+    .top_contact{
+        top: 500px;
+        text-align: center;
+        color: #fff;
+        margin: 3em 0 3em 0;
+        top: 100px;
+    }
+.contact_h3{
+    font-size: 3.5em;
+}
+.contact_p{
+    font-size: 2.5em;
+}
+.about_cidernaut{
+    display: block;/*cidernautの説明を縦並びにする*/
+}
+.explain_cidernaut h2{
+    font-size: 4.5em;
+    margin: 0.5em 0;
+}
+.explain_cidernaut p{
+    width: 100%;
+    font-size: 2.5em;
+}
+.about_hardcider{
+    display: block;/*cidernautの説明を縦並びにする*/
+}
+.about_hardcider h2{
+    font-size: 4.5em;
+    margin: 2em 0 0.5em 0;
+}
+.about_hardcider p{
+    width: 100%;
+    font-size: 2.5em;
+}
+.select_top{
+    margin-top: 1800px;
+    height: 1000px;
+    grid-template-rows: 1fr 1fr 1fr; 
+    grid-template-columns: 100%;
+
+}
+footer{
+    top: 400px;
+}
+.footer_all{
+    display: block;
+    text-align: center;
+    margin: 6em 0 ;
+}
+footer p{
+    font-size: 2em;
+}
+.footer_logo{
+    width: 250px;
+}
+.facebook_footer{
+    width: 100px;
+    margin: 60px 6px 32px 6px;
+}
+.instagram_footer{
+    width: 100px;
+    margin: 60px 6px 32px 10px;
+}
+.facebook{
+    width: 100px;
+    margin: 60px 6px 32px 20px;
+}
+.instagram{
+    width: 100px;
+    margin: 60px 6px 32px 20px;
+}
+.soushoku_01{
+    top: 45vh;
+}
+.soushoku_02{
+    top: 460vh;
+}
+.explain_01_images{
+    position: relative;
+    display: block;
+}
+#shop_image_up img{
+    position: absolute;
+    right: 70px;
+    top: -100px;
+    width: 70%;
+}
+#shop_image_down img{
+    position: absolute;
+    top: 600px;
+    width: 45%;
+}
+.explain_02_images{
+    position: relative;
+    display: block;
+}
+.about_hardcider{
+    position: relative;
+    display: block;
+    width: 100%;
+    z-index: 1;
+    margin-top: 1800px;
+}
+#cider_image_down img{
+    position: absolute;
+    right: 0;
+    top: -100px;
+    width: 70%;
+}
+#cider_image_up img{
+    position: absolute;
+    top: 600px;
+    width: 45%;
+}
+#cider_image_up{
+    margin-left: 60px;
+}
+
+
+.menu{
+    display: none;
+}
+.menu_sp{
+    display: block;
+}
+.shop{
+    display: none;
+}
+.shop_sp{
+    display: block;
+}
+.news{
+    display: none;
+}
+.news_sp{
+    display: block;
+}
+    }/*スマホサイズ設定ここまで*/
