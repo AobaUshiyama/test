@@ -167,6 +167,23 @@ h2{
     margin: 150px 0 -150px 50px;
 }
 
+.dli-chevron-round-right{
+    display: inline-block;
+    color: #4981e9;
+    width: 1.6em;
+    height: 1.6em;
+    border: 0.3em solid currentColor;
+    border-left: 0;
+    border-bottom: 0;
+    box-sizing: border-box;
+    transform: translateX(-10%) rotate(45deg);
+    margin: 9em 2em 0 0;
+    transition: transform 0.3s ease;
+}
+a:hover .dli-chevron-round-right{
+    transform: translateX(5px) rotate(45deg);
+}
+
 footer{
     top: 960px;
     display: block;
