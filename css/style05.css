@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+body{
+    text-align: center;
+}
+
+img{
+    width: 20%;
+}
+
+h2{
+    font-size: 1.2em;
+}
+
+div{
+    margin-top: 10%;
+}
+
+p{
+    font-weight: 500;
+}
+
+@media screen and (max-width:479px) {
+    /* スマホサイズ：479px以下 */
+    h2{
+        font-size: 2.6em;
+    }
+    img{
+        width: 60%;
+    }
+    div{
+        margin-top: 50%;
+    }
+    
+  }
