@@ -369,13 +369,6 @@ footer{
 /* --------------------------
 Media Queries（メディアクエリ）
 -----------------------------*/
-
-@media screen and (min-width:480px) and (max-width:768px) {
-    /*タブレットサイズ／スマホ横画面サイズ：480px～768px */
-
-
-    
-    }/*タブレットサイズ/スマホ横サイズの設定：ここまで*/
     
     
     @media screen and (max-width:479px) {
